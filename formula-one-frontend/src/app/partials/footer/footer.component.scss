@@ -1,0 +1,39 @@
+$footer-bg-color: #E3E3E3;
+$footer-border-top-bolor: #DDD;
+$footer-padding-top-bottom: 10px;
+$footer-p-margin-top: 20px;
+$footer-img-size: 2.5em;
+
+@mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer {
+    width: 100%;
+    position: fixed;
+    z-index: 10;
+    bottom: 0;
+    left: 0;
+
+    .footer-bottom {
+        background: $footer-bg-color;
+        border-top: 1px solid $footer-border-top-bolor;
+        padding: $footer-padding-top-bottom 0;
+
+        p {
+            margin-top: $footer-p-margin-top;
+            @include flex-center();
+        }
+
+        .payments {
+            font-size: $footer-img-size;
+            @include flex-center();
+
+            a {
+                padding: 5px;
+            }
+        }
+    }
+}
