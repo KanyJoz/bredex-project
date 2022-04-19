@@ -1,12 +1,22 @@
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand">Home</a>
+            <a routerLink="/home" class="navbar-brand">Home</a>
         </div>
         <div class="collapser navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><a href="#">List Teams</a></li>
-                <li><a href="#">Add Team</a></li>
+                <li
+                    routerLinkActive="active"
+                    [routerLinkActiveOptions]="{exact: true}"
+                >
+                    <a routerLink="/racer-teams">List Teams</a>
+                </li>
+                <li
+                    routerLinkActive="active"
+                    [routerLinkActiveOptions]="{exact: true}"
+                >
+                    <a [routerLink]="['/racer-teams', 'new']">Add Team</a>
+                </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown" appDropdown>
