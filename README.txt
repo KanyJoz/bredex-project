@@ -7,6 +7,8 @@ Szintén észrevettem a feladatkiírás szövegéből, hogy a BE-en a Java a han
 
 Összefoglalva:
 - Angular 11+-ban szeretném megírni a FE-t, ami számomra is teljesen ismeretlen terep, de egy remek kihívás
+    . Arra gondoltam, hogy még érdekesebb legyen, hogy Bootstrap CSS könyvtárat használok majd formázásra és nem használok most bonyolultabb komponenseket,
+    amelyekhez persze már jól jönne egy komponens library, mint az Angular Material.
 - Laravel (PHP keretrendszer) segítségével írnám meg a RESP API-t
 - illetve láttam, hogy in memory adatbázisra van szükség, tehát konkrét migrációkkal felépített adatbázisszerkezetet, akkor most nem kell megvalósítani
     , hanem akkor mondjuk a localstorage API segítségével kell karban tartani egy in memory adatbázist és oda menteni a CRUD műveletek eredményét
