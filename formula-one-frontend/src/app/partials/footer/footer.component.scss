@@ -12,7 +12,7 @@ $footer-img-size: 2.5em;
 
 .footer {
     width: 100%;
-    position: fixed;
+    position: sticky;
     z-index: 10;
     bottom: 0;
     left: 0;

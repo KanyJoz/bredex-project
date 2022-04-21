@@ -1,1 +1,16 @@
-<p>racer-teams-list works!</p>
+<div class="container">
+    <div
+        id="racer-team__box"
+        class="jumbotron"
+        *ngFor="let racerTeam of racerTeams"
+    >
+        <h1 class="display-4">{{ racerTeam.name }}</h1>
+        <p class="lead">Year of foundation: {{ racerTeam.yearOfFoundation }}</p>
+        <hr>
+        <p>Number of World Cups won: {{ racerTeam.wonWorldCupsNumber }}</p>
+        <p class="lead">
+          <a class="btn btn-info btn-lg" role="button">Update</a>
+          <a class="btn btn-danger btn-lg" role="button">Delete</a>
+        </p>
+      </div>
+</div>
