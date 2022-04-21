@@ -1,21 +1,16 @@
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a routerLink="/home" class="navbar-brand">Home</a>
+            <a routerLink="/home" class="navbar-brand">{{ brandText }}</a>
         </div>
         <div class="collapser navbar-collapse">
             <ul class="nav navbar-nav">
                 <li
+                    *ngFor="let headerLink of headerLinks"
                     routerLinkActive="active"
                     [routerLinkActiveOptions]="{exact: true}"
                 >
-                    <a routerLink="/racer-teams">List Teams</a>
-                </li>
-                <li
-                    routerLinkActive="active"
-                    [routerLinkActiveOptions]="{exact: true}"
-                >
-                    <a [routerLink]="['/racer-teams', 'new']">Add Team</a>
+                    <a [routerLink]="headerLink.navigationArray">{{ headerLink.text }}</a>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -24,7 +19,7 @@
                         class="dropdown-toggle"
                         role="button"
                     >
-                        Settings
+                        {{ dropdownText }}
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">

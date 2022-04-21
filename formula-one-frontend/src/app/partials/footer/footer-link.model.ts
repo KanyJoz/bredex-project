@@ -1,6 +1,6 @@
 export class FooterLink {
-    private _linkURL: string;
-    private _faDescriptor: string;
+    private readonly _linkURL: string;
+    private readonly _faDescriptor: string;
 
     constructor(linkURL: string, faDescriptor: string) {
         this._linkURL = linkURL;
