@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { RacerTeam } from '../racer-team/racer-team.model';
+import { RacerTeam } from '../racer-team.model';
 
 @Component({
   selector: 'app-racer-teams-list',

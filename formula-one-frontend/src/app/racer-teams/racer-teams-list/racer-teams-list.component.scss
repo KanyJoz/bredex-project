@@ -5,3 +5,23 @@
         margin-right: 10px;
     }
 }
+
+.jumbotron:last-of-type {
+    margin-bottom: 100px;
+
+    @media screen and (max-width: 992px) {
+        margin-bottom: 110px;
+    }
+
+    @media screen and (max-width: 604px) {
+        margin-bottom: 160px;
+    }
+
+    @media screen and (max-width: 358px) {
+        margin-bottom: 210px;
+    }
+
+    @media screen and (max-width: 352px) {
+        margin-bottom: 290px;
+    }
+}

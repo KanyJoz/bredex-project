@@ -6,14 +6,12 @@ import { RacerTeamsRoutingModule } from './racer-teams-routing.module';
 import { RacerTeamsComponent } from './racer-teams.component';
 import { RacerTeamsListComponent } from './racer-teams-list/racer-teams-list.component';
 import { RacerTeamNewEditComponent } from './racer-team-new-edit/racer-team-new-edit.component';
-import { RacerTeamComponent } from './racer-team/racer-team.component';
 
 @NgModule({
   declarations: [
     RacerTeamsComponent,
     RacerTeamsListComponent,
     RacerTeamNewEditComponent,
-    RacerTeamComponent,
   ],
   imports: [
     RacerTeamsRoutingModule,
@@ -23,7 +21,6 @@ import { RacerTeamComponent } from './racer-team/racer-team.component';
     RacerTeamsComponent,
     RacerTeamsListComponent,
     RacerTeamNewEditComponent,
-    RacerTeamComponent,
     RacerTeamNewEditComponent,
     RacerTeamsRoutingModule,
   ]

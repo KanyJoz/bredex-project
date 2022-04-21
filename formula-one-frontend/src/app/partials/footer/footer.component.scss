@@ -12,6 +12,9 @@ $footer-img-size: 2.5em;
 
 .footer {
     width: 100%;
+    position: fixed;
+    z-index: 10;
+    bottom: 0;
 
     .footer-bottom {
         background: $footer-bg-color;
