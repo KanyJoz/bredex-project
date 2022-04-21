@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-racer-team-new-edit',
   templateUrl: './racer-team-new-edit.component.html',
   styleUrls: ['./racer-team-new-edit.component.scss']
 })
-export class RacerTeamNewEditComponent implements OnInit {
+export class RacerTeamNewEditComponent {
+    @ViewChild('f') racerTeamForm!: NgForm;
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+    onSubmit(): void {
+        console.log(this.racerTeamForm);
+    }
 }

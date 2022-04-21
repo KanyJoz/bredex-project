@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { SharedModule } from '../shared/shared.module';
 import { RacerTeamsRoutingModule } from './racer-teams-routing.module';
@@ -6,6 +7,7 @@ import { RacerTeamsRoutingModule } from './racer-teams-routing.module';
 import { RacerTeamsComponent } from './racer-teams.component';
 import { RacerTeamsListComponent } from './racer-teams-list/racer-teams-list.component';
 import { RacerTeamNewEditComponent } from './racer-team-new-edit/racer-team-new-edit.component';
+
 
 @NgModule({
   declarations: [
@@ -16,6 +18,7 @@ import { RacerTeamNewEditComponent } from './racer-team-new-edit/racer-team-new-
   imports: [
     RacerTeamsRoutingModule,
     SharedModule,
+    FormsModule,
   ],
   exports: [
     RacerTeamsComponent,
