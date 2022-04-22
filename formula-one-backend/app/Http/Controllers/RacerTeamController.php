@@ -13,7 +13,8 @@ class RacerTeamController extends Controller
     public function index()
     {
         $allRacerTeams = RacerTeam::all();
-        return RacerTeamResource::collection($allRacerTeams);
+        return RacerTeamResource::collection($allRacerTeams)
+            ->additional(['isCollection' => true]);
     }
 
     public function store(RacerTeamStoreRequest $request)
