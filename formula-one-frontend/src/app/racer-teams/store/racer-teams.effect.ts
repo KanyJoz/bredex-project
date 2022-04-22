@@ -22,7 +22,22 @@ export class RacerTeamsEffects {
                     })
                 );
             }),
+        );
+    });
 
+    startDeleteRacerTeam = createEffect(() => {
+        return this.actions.pipe(
+            ofType(RacerTeamsActions.START_DELETE_RACER_TEAM),
+            switchMap((startActionData: RacerTeamsActions.StartDeleteRacerTeams) => {
+                return this.http.delete<RacerTeam>(environment.apiURL + 'racer_teams/' + startActionData.payload).pipe(
+                    map(racerTeam => {
+                        return new RacerTeamsActions.DeleteRacerTeam(racerTeam.id);
+                    }),
+                    catchError(errorsResponse => {
+                        return of(new RacerTeamsActions.FailRacerTeams('Could not delete the racer team!'));
+                    })
+                );
+            })
         );
     });
 

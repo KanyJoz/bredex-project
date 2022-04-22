@@ -11,9 +11,7 @@ export class RacerTeamsInterceptorService implements HttpInterceptor {
             map(event => {
                 if (
                     event instanceof HttpResponse &&
-                    event.url?.startsWith(environment.apiURL + 'racer_teams') &&
-                    event.body &&
-                    event.body.isCollection
+                    event.url?.startsWith(environment.apiURL + 'racer_teams')
                 ) {
                     event = event.clone({ body: event.body.data })
                 }

@@ -49,6 +49,17 @@ export function racerTeamsReducer(
                 ...state,
                 racerTeams: [...state.racerTeams, newRacerteam],
             };
+        case RacerTeamsActions.START_DELETE_RACER_TEAM:
+            return {
+                ...state,
+                racerTeamsLoading: true,
+            };
+        case RacerTeamsActions.DELETE_RACER_TEAM:
+            return {
+                ...state,
+                racerTeams: state.racerTeams.filter(racerTeam => racerTeam.id !== action.payload),
+                racerTeamsLoading: false,
+            };
         default:
             return state;
     }

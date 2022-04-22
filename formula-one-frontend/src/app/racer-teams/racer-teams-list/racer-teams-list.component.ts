@@ -28,4 +28,8 @@ export class RacerTeamsListComponent implements OnInit {
             this.racerTeamsError = racerTeamsSlice.racerTeamsError;
         });
     }
+
+    onDelete(racerTeamID: number) {
+        this.store.dispatch(new RacerTeamsActions.StartDeleteRacerTeams(racerTeamID));
+    }
 }
