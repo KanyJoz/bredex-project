@@ -3,13 +3,16 @@ export class RacerTeam {
     yearOfFoundation: number;
     wonWorldCupsNumber: number;
     haveAlreadyPayed: boolean;
+    id: number;
 
     constructor(
         name: string,
         yearOfFoundation: number,
         wonWorldCupNumber: number,
-        haveAlreadyPayed: boolean = false
+        haveAlreadyPayed: boolean = false,
+        id: number = Math.random()
     ) {
+        this.id = id;
         this.name = name;
         this.yearOfFoundation = this.checkYearOfDoundation(yearOfFoundation);
         this.wonWorldCupsNumber = this.checkWonWorldCupsNumber(wonWorldCupNumber);

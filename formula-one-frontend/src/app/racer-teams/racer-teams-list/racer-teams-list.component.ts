@@ -9,8 +9,8 @@ import { RacerTeam } from '../racer-team.model';
 })
 export class RacerTeamsListComponent {
     racerTeams: RacerTeam[] = [
-        new RacerTeam('Meclaren Mercedes', 1901, 10, true),
-        new RacerTeam('Red Bull Racing', 1999, 3, true),
-        new RacerTeam('Ferrari', 1944, 8, true),
+        new RacerTeam('Meclaren Mercedes', 1901, 10),
+        new RacerTeam('Red Bull Racing', 1999, 3),
+        new RacerTeam('Ferrari', 1944, 8),
     ];
 }

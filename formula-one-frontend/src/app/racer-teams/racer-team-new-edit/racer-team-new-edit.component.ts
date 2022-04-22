@@ -2,6 +2,8 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 
+import { RacerTeam } from './../racer-team.model';
+
 @Component({
   selector: 'app-racer-team-new-edit',
   templateUrl: './racer-team-new-edit.component.html',
@@ -22,7 +24,18 @@ export class RacerTeamNewEditComponent implements OnInit {
     }
 
     onSubmit(): void {
-        console.log(this.racerTeamForm);
+        if (!this.inEditMode) {
+            const newRacerTeamFormData = {
+                id: Math.random(),
+                name: this.racerTeamForm.value.name,
+                year: this.racerTeamForm.value.year,
+                cups: this.racerTeamForm.value.cups,
+                payed: this.racerTeamForm.value.payed,
+            };
+            console.log(newRacerTeamFormData);
+        } else {
+            console.log('TODO edit part');
+        }
     }
 
     getSubmitButtonLabel(): string {
