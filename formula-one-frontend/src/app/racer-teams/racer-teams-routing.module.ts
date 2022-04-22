@@ -11,7 +11,7 @@ const racerTeamsRoutes: Routes = [
         path: '',
         component: RacerTeamsComponent,
         children: [
-            { path: '', component: RacerTeamsListComponent, resolve: [RacerTeamsFetchResolverService] },
+            { path: '', component: RacerTeamsListComponent},
             { path: 'new', component: RacerTeamNewEditComponent },
             { path: ':id/edit', component: RacerTeamNewEditComponent }
         ]

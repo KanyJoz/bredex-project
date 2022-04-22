@@ -4,6 +4,7 @@ import { RacerTeam } from './../racer-team.model';
 
 export const FETCH_RACER_TEAMS = '[Racer Teams] Fetch Racer Teams';
 export const SET_RACER_TEAMS = '[Racer Teams] Set Racer Teams';
+export const FAIL_RACER_TEAMS = '[Racer Teams] Fail Racer Teams';
 export const ADD_RACER_TEAM = '[Racer Teams] Add Racer Team';
 
 export class FetchRacerTeams implements Action {
@@ -14,6 +15,12 @@ export class SetRacerTeams implements Action {
     readonly type = SET_RACER_TEAMS;
 
     constructor(public payload: RacerTeam[]) {}
+}
+
+export class FailRacerTeams implements Action {
+    readonly type = FAIL_RACER_TEAMS;
+
+    constructor(public payload: string){}
 }
 
 export class AddRacerTeam implements Action {
@@ -29,5 +36,7 @@ export class AddRacerTeam implements Action {
 }
 
 export type RacerTeamsActions =
+    | FetchRacerTeams
     | AddRacerTeam
-    | SetRacerTeams;
+    | SetRacerTeams
+    | FailRacerTeams;
