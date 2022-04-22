@@ -20,7 +20,7 @@ class RacerTeamsSeeder extends Seeder
             'name' => 'Meclaren Mercedes',
             'year_of_foundation' => 1901,
             'won_world_cups_number' => 10,
-            'have_already_played' => true,
+            'have_already_payed' => true,
         ]);
 
         RacerTeam::create([

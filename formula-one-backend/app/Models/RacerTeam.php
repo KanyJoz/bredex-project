@@ -11,6 +11,6 @@ class RacerTeam extends Model
         'name',
         'year_of_foundation',
         'won_world_cups_number',
-        'have_already_played',
+        'have_already_payed',
     ];
 }

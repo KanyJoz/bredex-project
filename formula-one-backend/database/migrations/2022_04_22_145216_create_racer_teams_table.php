@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->integer('year_of_foundation');
             $table->integer('won_world_cups_number');
-            $table->boolean('have_already_played')->default(false);
+            $table->boolean('have_already_payed')->default(false);
             $table->timestamps();
         });
     }
