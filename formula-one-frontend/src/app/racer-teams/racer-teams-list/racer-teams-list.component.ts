@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { map } from 'rxjs';
 
+import { AppState } from 'src/app/store/app.reducer';
 import { RacerTeam } from '../racer-team.model';
 
 @Component({
@@ -7,10 +10,19 @@ import { RacerTeam } from '../racer-team.model';
   templateUrl: './racer-teams-list.component.html',
   styleUrls: ['./racer-teams-list.component.scss']
 })
-export class RacerTeamsListComponent {
-    racerTeams: RacerTeam[] = [
-        new RacerTeam('Meclaren Mercedes', 1901, 10),
-        new RacerTeam('Red Bull Racing', 1999, 3),
-        new RacerTeam('Ferrari', 1944, 8),
-    ];
+export class RacerTeamsListComponent implements OnInit {
+    racerTeams: RacerTeam[] = [];
+
+    constructor (private store: Store<AppState>) {}
+
+    ngOnInit(): void {
+        this.store
+        .select('racerTeams').pipe(
+            map(racerTeamsSlice => {
+                return racerTeamsSlice.racerTeams;
+            })
+        ).subscribe(racerTeamsData => {
+            this.racerTeams = racerTeamsData;
+        });
+    }
 }

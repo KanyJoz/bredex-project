@@ -1,8 +1,10 @@
+import { Store } from '@ngrx/store';
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 
-import { RacerTeam } from './../racer-team.model';
+import { AppState } from './../../store/app.reducer';
+import * as RacerTeamsActions from '../store/racer-teams.actions';
 
 @Component({
   selector: 'app-racer-team-new-edit',
@@ -13,7 +15,10 @@ export class RacerTeamNewEditComponent implements OnInit {
     @ViewChild('f') racerTeamForm!: NgForm;
     inEditMode: boolean = false;
 
-    constructor(private route: ActivatedRoute) {}
+    constructor(
+        private route: ActivatedRoute,
+        private store: Store<AppState>
+    ) {}
 
     ngOnInit(): void {
         this.route.params.subscribe((params: Params) => {
@@ -32,7 +37,7 @@ export class RacerTeamNewEditComponent implements OnInit {
                 cups: this.racerTeamForm.value.cups,
                 payed: this.racerTeamForm.value.payed,
             };
-            console.log(newRacerTeamFormData);
+            this.store.dispatch(new RacerTeamsActions.AddRacerTeam(newRacerTeamFormData));
         } else {
             console.log('TODO edit part');
         }
