@@ -6,9 +6,7 @@ export interface RacerTeamsState {
 }
 
 const initialRacerTeamsState: RacerTeamsState = {
-    racerTeams: [
-        new RacerTeam('Meclaren Mercedes', 1901, 10),
-    ]
+    racerTeams: [],
 };
 
 export function racerTeamsReducer(
@@ -16,6 +14,11 @@ export function racerTeamsReducer(
     action: RacerTeamsActions.RacerTeamsActions
 ): RacerTeamsState {
     switch (action.type) {
+        case RacerTeamsActions.SET_RACER_TEAMS:
+            return {
+                ...state,
+                racerTeams: [...action.payload],
+            };
         case RacerTeamsActions.ADD_RACER_TEAM:
             return addRacerTeam(state, action);
         default:
