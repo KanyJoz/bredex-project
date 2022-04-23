@@ -16,6 +16,11 @@ class RacerTeamController extends Controller
         return RacerTeamResource::collection($allRacerTeams);
     }
 
+    public function show(RacerTeam $racerTeam)
+    {
+        return new RacerTeamResource($racerTeam);
+    }
+
     public function store(RacerTeamStoreRequest $request)
     {
         $newRacerTeam = RacerTeam::create([
@@ -28,7 +33,12 @@ class RacerTeamController extends Controller
     }
 
     public function update(RacerTeam $racerTeam, RacerTeamUpdateRequest $request) {
-        $racerTeam->update($request->all());
+        $racerTeam->update([
+            'name' => $request->input('name'),
+            'year_of_foundation' => $request->input('yearOfFoundation'),
+            'won_world_cups_number' => $request->input('wonWorldCups'),
+            'have_already_payed' => $request->input('haveAlreadyPayed'),
+        ]);
         return new RacerTeamResource($racerTeam);
     }
 

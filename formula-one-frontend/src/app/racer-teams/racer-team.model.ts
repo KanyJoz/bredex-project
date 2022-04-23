@@ -6,11 +6,11 @@ export class RacerTeam {
     id: number;
 
     constructor(
+        id: number,
         name: string,
         yearOfFoundation: number,
         wonWorldCupNumber: number,
         haveAlreadyPayed: boolean = false,
-        id: number = Math.random()
     ) {
         this.id = id;
         this.name = name;

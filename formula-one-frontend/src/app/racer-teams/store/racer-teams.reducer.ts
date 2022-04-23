@@ -44,8 +44,8 @@ export function racerTeamsReducer(
                 racerTeamsError: action.payload,
                 racerTeamsLoading: false,
             }
-
         case RacerTeamsActions.START_ADD_RACER_TEAM:
+        case RacerTeamsActions.GET_RACER_TEAM:
             return {
                 ...state,
                 racerTeamLoading: true,
@@ -55,6 +55,21 @@ export function racerTeamsReducer(
             return {
                 ...state,
                 racerTeams: [...state.racerTeams, action.payload],
+                racerTeamLoading: false,
+                racerTeamsError: '',
+            };
+        case RacerTeamsActions.SET_RACER_TEAM:
+            const newRacerTeam = new RacerTeam(
+                action.payload.id,
+                action.payload.name,
+                action.payload.yearOfFoundation,
+                action.payload.wonWorldCupsNumber,
+                !!action.payload.haveAlreadyPayed
+            );
+
+            return {
+                ...state,
+                racerTeam: newRacerTeam,
                 racerTeamLoading: false,
                 racerTeamsError: '',
             };

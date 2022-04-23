@@ -58,6 +58,22 @@ export class RacerTeamsEffects {
         );
     });
 
+    getRacerTeam = createEffect(() => {
+        return this.actions.pipe(
+            ofType(RacerTeamsActions.GET_RACER_TEAM),
+            switchMap((getActionData: RacerTeamsActions.GetRacerTeam) => {
+                return this.http.get<RacerTeam>(environment.apiURL + 'racer_teams/' + getActionData.payload).pipe(
+                    map(racerTeam => {
+                        return new RacerTeamsActions.SetRacerTeam(racerTeam);
+                    }),
+                    catchError(errorResponse => {
+                        return of(new RacerTeamsActions.FailRacerTeam('Could not load the racer team from the server!'));
+                    })
+                );
+            }),
+        );
+    });
+
     successAddRacerTeam = createEffect(
         () =>
             this.actions.pipe(

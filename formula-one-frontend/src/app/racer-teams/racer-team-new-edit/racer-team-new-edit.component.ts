@@ -5,6 +5,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 
 import { AppState } from './../../store/app.reducer';
 import * as RacerTeamsActions from '../store/racer-teams.actions';
+import { RacerTeam } from './../racer-team.model';
 
 @Component({
   selector: 'app-racer-team-new-edit',
@@ -14,24 +15,27 @@ import * as RacerTeamsActions from '../store/racer-teams.actions';
 export class RacerTeamNewEditComponent implements OnInit {
     @ViewChild('f') racerTeamForm!: NgForm;
     inEditMode: boolean = false;
+    racerTeam: RacerTeam = null;
     racerTeamLoading: boolean = false;
     racerTeamError: string = '';
 
     constructor(
         private route: ActivatedRoute,
         private store: Store<AppState>
-    ) {}
-
-    ngOnInit(): void {
+    ) {
         this.route.params.subscribe((params: Params) => {
             if ('id' in params) {
                 this.inEditMode = true;
+                this.store.dispatch(new RacerTeamsActions.GetRacerTeam(params['id']));
             }
         });
+    }
 
+    ngOnInit(): void {
         this.store
         .select('racerTeams').pipe(
         ).subscribe(racerTeamsSlice => {
+            this.racerTeam = racerTeamsSlice.racerTeam;
             this.racerTeamLoading = racerTeamsSlice.racerTeamLoading;
             this.racerTeamError = racerTeamsSlice.racerTeamError;
         });

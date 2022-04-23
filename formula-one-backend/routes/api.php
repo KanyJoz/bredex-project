@@ -20,4 +20,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('racer_teams', RacerTeamController::class)
-    ->only(['index', 'store', 'update', 'destroy']);
+    ->only(['index', 'show', 'store', 'update', 'destroy']);

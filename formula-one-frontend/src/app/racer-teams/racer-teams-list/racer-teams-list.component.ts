@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
@@ -15,7 +16,7 @@ export class RacerTeamsListComponent implements OnInit {
     racerTeamsError: string = '';
     racerTeamsLoading: boolean = false;
 
-    constructor (private store: Store<AppState>) {
+    constructor (private store: Store<AppState>, private router: Router) {
         this.store.dispatch(new RacerTeamsActions.FetchRacerTeams());
     }
 
@@ -27,6 +28,10 @@ export class RacerTeamsListComponent implements OnInit {
             this.racerTeamsLoading = racerTeamsSlice.racerTeamsLoading;
             this.racerTeamsError = racerTeamsSlice.racerTeamsError;
         });
+    }
+
+    onUpdate(racerTeamID: number) {
+        this.router.navigate(['/racer-teams', racerTeamID, 'edit']);
     }
 
     onDelete(racerTeamID: number) {

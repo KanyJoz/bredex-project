@@ -9,7 +9,7 @@
                             type="text"
                             id="name"
                             class="form-control"
-                            ngModel
+                            [ngModel]="racerTeam?.name"
                             name="name"
                             required
                             #name="ngModel"
@@ -27,7 +27,7 @@
                             type="number"
                             id="year"
                             class="form-control"
-                            ngModel
+                            [ngModel]="racerTeam?.yearOfFoundation"
                             name="year"
                             required
                             pattern="([1-2][0-9]{3})"
@@ -46,7 +46,7 @@
                             type="number"
                             id="cups"
                             class="form-control"
-                            ngModel
+                            [ngModel]="racerTeam?.wonWorldCupsNumber"
                             name="cups"
                             required
                             min="0"
@@ -64,7 +64,7 @@
                             <input
                                 type="radio"
                                 name="payed"
-                                [ngModel]="false"
+                                [ngModel]="racerTeam ? racerTeam.haveAlreadyPayed : false"
                                 [value]="true"
                             >
                                 Already payed entry fee
@@ -75,7 +75,7 @@
                             <input
                                 type="radio"
                                 name="payed"
-                                [ngModel]="false"
+                                [ngModel]="racerTeam ? racerTeam.haveAlreadyPayed : false"
                                 [value]="false"
                             >
                                 Did not pay entry fee yet

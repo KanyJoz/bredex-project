@@ -10,7 +10,7 @@
             <hr>
             <p>Number of World Cups won: {{ racerTeam.wonWorldCupsNumber }}</p>
             <p class="lead">
-            <a class="btn btn-info btn-lg" role="button">Update</a>
+            <a class="btn btn-info btn-lg" role="button" (click)="onUpdate(racerTeam.id)">Update</a>
             <a class="btn btn-danger btn-lg" role="button" (click)="onDelete(racerTeam.id)">Delete</a>
             </p>
         </div>
