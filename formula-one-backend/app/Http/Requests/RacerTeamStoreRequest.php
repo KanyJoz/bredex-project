@@ -17,7 +17,7 @@ class RacerTeamStoreRequest extends FormRequest
             'name' => 'required|string',
             'yearOfFoundation' => 'required|min:1700|integer',
             'wonWorldCups' => 'required|min:0|integer',
-            'haveAlreadyPayed' => 'somtetimes|boolean',
+            'haveAlreadyPayed' => 'required|boolean',
         ];
     }
 }

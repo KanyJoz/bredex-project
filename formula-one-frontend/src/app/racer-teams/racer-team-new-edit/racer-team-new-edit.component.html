@@ -1,93 +1,104 @@
 <div class="container">
-    <div class="row">
-        <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
-            <form (ngSubmit)="onSubmit()" #f="ngForm">
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input
-                        type="text"
-                        id="name"
-                        class="form-control"
-                        ngModel
-                        name="name"
-                        required
-                        #name="ngModel"
-                    >
-                    <span
-                        class="help-block"
-                        *ngIf="!name.valid && name.touched"
-                    >
-                        Please enter a name
-                    </span>
-                </div>
-                <div class="form-group">
-                    <label for="year">Year of Foundation</label>
-                    <input
-                        type="number"
-                        id="year"
-                        class="form-control"
-                        ngModel
-                        name="year"
-                        required
-                        pattern="([1-2][0-9]{3})"
-                        #year="ngModel"
-                    >
-                    <span
-                        class="help-block"
-                        *ngIf="!year.valid && year.touched"
-                    >
-                        Please enter a valid year
-                    </span>
-                </div>
-                <div class="form-group">
-                    <label for="cups">Wolrd Cups won</label>
-                    <input
-                        type="number"
-                        id="cups"
-                        class="form-control"
-                        ngModel
-                        name="cups"
-                        required
-                        min="0"
-                        #cups="ngModel"
-                    >
-                    <span
-                        class="help-block"
-                        *ngIf="!cups.valid && cups.touched"
-                    >
-                        Please enter a valid number
-                    </span>
-                </div>
-                <div class="radio">
-                    <label>
+    <div *ngIf="!racerTeamError.length && !racerTeamLoading">
+        <div class="row">
+            <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+                <form (ngSubmit)="onSubmit()" #f="ngForm">
+                    <div class="form-group">
+                        <label for="name">Name</label>
                         <input
-                            type="radio"
-                            name="payed"
-                            [ngModel]="false"
-                            [value]="true"
+                            type="text"
+                            id="name"
+                            class="form-control"
+                            ngModel
+                            name="name"
+                            required
+                            #name="ngModel"
                         >
-                            Already payed entry fee
-                    </label>
-                </div>
-                <div class="radio">
-                    <label>
+                        <span
+                            class="help-block"
+                            *ngIf="!name.valid && name.touched"
+                        >
+                            Please enter a name
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <label for="year">Year of Foundation</label>
                         <input
-                            type="radio"
-                            name="payed"
-                            [ngModel]="false"
-                            [value]="false"
+                            type="number"
+                            id="year"
+                            class="form-control"
+                            ngModel
+                            name="year"
+                            required
+                            pattern="([1-2][0-9]{3})"
+                            #year="ngModel"
                         >
-                            Did not pay entry fee yet
-                    </label>
-                </div>
-                <button
-                    class="btn btn-primary"
-                    type="submit"
-                    [disabled]="!f.valid"
-                >
-                    {{ getSubmitButtonLabel() }}
-                </button>
-            </form>
+                        <span
+                            class="help-block"
+                            *ngIf="!year.valid && year.touched"
+                        >
+                            Please enter a valid year
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <label for="cups">Wolrd Cups won</label>
+                        <input
+                            type="number"
+                            id="cups"
+                            class="form-control"
+                            ngModel
+                            name="cups"
+                            required
+                            min="0"
+                            #cups="ngModel"
+                        >
+                        <span
+                            class="help-block"
+                            *ngIf="!cups.valid && cups.touched"
+                        >
+                            Please enter a valid number
+                        </span>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input
+                                type="radio"
+                                name="payed"
+                                [ngModel]="false"
+                                [value]="true"
+                            >
+                                Already payed entry fee
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input
+                                type="radio"
+                                name="payed"
+                                [ngModel]="false"
+                                [value]="false"
+                            >
+                                Did not pay entry fee yet
+                        </label>
+                    </div>
+                    <button
+                        class="btn btn-primary"
+                        type="submit"
+                        [disabled]="!f.valid"
+                    >
+                        {{ getSubmitButtonLabel() }}
+                    </button>
+                </form>
+            </div>
         </div>
     </div>
+    <div
+        *ngIf="racerTeamError.length && !racerTeamLoading"
+        class="alert alert-danger"
+        role="alert"
+    >
+        <strong>{{ racerTeamError }}</strong>
+    </div>
+
+    <div class="lds-dual-ring" *ngIf="racerTeamLoading"></div>
 </div>

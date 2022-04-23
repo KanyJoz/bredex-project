@@ -18,7 +18,12 @@ class RacerTeamController extends Controller
 
     public function store(RacerTeamStoreRequest $request)
     {
-        $newRacerTeam = RacerTeam::create($request->all());
+        $newRacerTeam = RacerTeam::create([
+            'name' => $request->input('name'),
+            'year_of_foundation' => $request->input('yearOfFoundation'),
+            'won_world_cups_number' => $request->input('wonWorldCups'),
+            'have_already_payed' => $request->input('haveAlreadyPayed'),
+        ]);
         return new RacerTeamResource($newRacerTeam);
     }
 

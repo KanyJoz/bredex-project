@@ -14,6 +14,8 @@ import * as RacerTeamsActions from '../store/racer-teams.actions';
 export class RacerTeamNewEditComponent implements OnInit {
     @ViewChild('f') racerTeamForm!: NgForm;
     inEditMode: boolean = false;
+    racerTeamLoading: boolean = false;
+    racerTeamError: string = '';
 
     constructor(
         private route: ActivatedRoute,
@@ -26,18 +28,24 @@ export class RacerTeamNewEditComponent implements OnInit {
                 this.inEditMode = true;
             }
         });
+
+        this.store
+        .select('racerTeams').pipe(
+        ).subscribe(racerTeamsSlice => {
+            this.racerTeamLoading = racerTeamsSlice.racerTeamLoading;
+            this.racerTeamError = racerTeamsSlice.racerTeamError;
+        });
     }
 
     onSubmit(): void {
         if (!this.inEditMode) {
             const newRacerTeamFormData = {
-                id: Math.random(),
                 name: this.racerTeamForm.value.name,
-                year: this.racerTeamForm.value.year,
-                cups: this.racerTeamForm.value.cups,
-                payed: this.racerTeamForm.value.payed,
+                yearOfFoundation: this.racerTeamForm.value.year,
+                wonWorldCups: this.racerTeamForm.value.cups,
+                haveAlreadyPayed: this.racerTeamForm.value.payed,
             };
-            this.store.dispatch(new RacerTeamsActions.AddRacerTeam(newRacerTeamFormData));
+            this.store.dispatch(new RacerTeamsActions.StartAddRacerTeam(newRacerTeamFormData));
         } else {
             console.log('TODO edit part');
         }

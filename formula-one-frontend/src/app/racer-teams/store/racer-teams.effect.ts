@@ -1,7 +1,8 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { switchMap, map, catchError, of } from "rxjs";
+import { switchMap, map, catchError, of, tap } from "rxjs";
 
 import { environment } from "src/environments/environment";
 import * as RacerTeamsActions from "./racer-teams.actions";
@@ -41,8 +42,36 @@ export class RacerTeamsEffects {
         );
     });
 
+    startAddRacerTeam = createEffect(() => {
+        return this.actions.pipe(
+            ofType(RacerTeamsActions.START_ADD_RACER_TEAM),
+            switchMap((startAddData: RacerTeamsActions.StartAddRacerTeam) => {
+                return this.http.post<RacerTeam>(environment.apiURL + 'racer_teams', startAddData.payload).pipe(
+                    map(newRacerTeam => {
+                        return new RacerTeamsActions.AddRacerTeam(newRacerTeam);
+                    }),
+                    catchError(errorsResponse => {
+                        return of(new RacerTeamsActions.FailRacerTeam('Could not add the new racer team!'));
+                    })
+                );
+            })
+        );
+    });
+
+    successAddRacerTeam = createEffect(
+        () =>
+            this.actions.pipe(
+                ofType(RacerTeamsActions.ADD_RACER_TEAM),
+                tap(() => {
+                    this.router.navigate(['/racer-teams']);
+                }),
+            ),
+            { dispatch: false },
+    )
+
     constructor(
         private actions: Actions,
         private http: HttpClient,
+        private router: Router
     ) {}
 }

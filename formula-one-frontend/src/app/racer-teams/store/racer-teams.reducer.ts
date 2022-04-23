@@ -5,12 +5,20 @@ export interface RacerTeamsState {
     racerTeams: RacerTeam[];
     racerTeamsLoading: boolean;
     racerTeamsError: string;
+
+    racerTeam: RacerTeam;
+    racerTeamLoading: boolean;
+    racerTeamError: string;
 }
 
 const initialRacerTeamsState: RacerTeamsState = {
     racerTeams: [],
     racerTeamsLoading: false,
     racerTeamsError: '',
+
+    racerTeam: null,
+    racerTeamLoading: false,
+    racerTeamError: '',
 };
 
 export function racerTeamsReducer(
@@ -36,18 +44,19 @@ export function racerTeamsReducer(
                 racerTeamsError: action.payload,
                 racerTeamsLoading: false,
             }
-        case RacerTeamsActions.ADD_RACER_TEAM:
-            const newRacerteam = new RacerTeam(
-                action.payload.name,
-                action.payload.year,
-                action.payload.cups,
-                action.payload.payed,
-                action.payload.id,
-            );
 
+        case RacerTeamsActions.START_ADD_RACER_TEAM:
             return {
                 ...state,
-                racerTeams: [...state.racerTeams, newRacerteam],
+                racerTeamLoading: true,
+                racerTeamsError: '',
+            };
+        case RacerTeamsActions.ADD_RACER_TEAM:
+            return {
+                ...state,
+                racerTeams: [...state.racerTeams, action.payload],
+                racerTeamLoading: false,
+                racerTeamsError: '',
             };
         case RacerTeamsActions.START_DELETE_RACER_TEAM:
             return {
