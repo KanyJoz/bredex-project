@@ -9,6 +9,7 @@ export const START_ADD_RACER_TEAM = '[Racer Teams] Start Add Racer Team';
 export const ADD_RACER_TEAM = '[Racer Teams] Add Racer Team';
 export const GET_RACER_TEAM = '[Racer Teams] Get Racer Team';
 export const SET_RACER_TEAM = '[Racer Teams] Set Racer Team';
+export const UNSET_RACER_TEAM = '[Racer Teams] Unset Racer Team';
 export const FAIL_RACER_TEAM = '[Racer Teams] Fail Racer Team';
 export const START_DELETE_RACER_TEAM = '[Racer Teams] Start Delete Racer Team';
 export const DELETE_RACER_TEAM = '[Racer Teams] Delete Racer Team';
@@ -58,6 +59,10 @@ export class SetRacerTeam implements Action {
     constructor(public payload: RacerTeam) {}
 }
 
+export class UnSetRacerTeam implements Action {
+    readonly type = UNSET_RACER_TEAM;
+}
+
 export class FailRacerTeam implements Action {
     readonly type = FAIL_RACER_TEAM;
 
@@ -86,4 +91,5 @@ export type RacerTeamsActions =
     | StartDeleteRacerTeams
     | FailRacerTeam
     | GetRacerTeam
-    | SetRacerTeam;
+    | SetRacerTeam
+    | UnSetRacerTeam;

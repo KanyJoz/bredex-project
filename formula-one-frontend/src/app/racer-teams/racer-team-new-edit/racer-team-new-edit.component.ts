@@ -27,6 +27,9 @@ export class RacerTeamNewEditComponent implements OnInit {
             if ('id' in params) {
                 this.inEditMode = true;
                 this.store.dispatch(new RacerTeamsActions.GetRacerTeam(params['id']));
+            } else {
+                this.inEditMode = false;
+                this.store.dispatch(new RacerTeamsActions.UnSetRacerTeam());
             }
         });
     }

@@ -73,6 +73,11 @@ export function racerTeamsReducer(
                 racerTeamLoading: false,
                 racerTeamsError: '',
             };
+        case RacerTeamsActions.UNSET_RACER_TEAM:
+            return {
+                ...state,
+                racerTeam: null,
+            }
         case RacerTeamsActions.START_DELETE_RACER_TEAM:
             return {
                 ...state,
