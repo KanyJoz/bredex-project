@@ -44,18 +44,12 @@ export function racerTeamsReducer(
                 racerTeamsError: action.payload,
                 racerTeamsLoading: false,
             }
-        case RacerTeamsActions.START_ADD_RACER_TEAM:
         case RacerTeamsActions.GET_RACER_TEAM:
+        case RacerTeamsActions.START_ADD_RACER_TEAM:
+        case RacerTeamsActions.START_UPDATE_RACER_TEAM:
             return {
                 ...state,
                 racerTeamLoading: true,
-                racerTeamsError: '',
-            };
-        case RacerTeamsActions.ADD_RACER_TEAM:
-            return {
-                ...state,
-                racerTeams: [...state.racerTeams, action.payload],
-                racerTeamLoading: false,
                 racerTeamsError: '',
             };
         case RacerTeamsActions.SET_RACER_TEAM:
@@ -71,12 +65,44 @@ export function racerTeamsReducer(
                 ...state,
                 racerTeam: newRacerTeam,
                 racerTeamLoading: false,
-                racerTeamsError: '',
+                racerTeamError: '',
             };
         case RacerTeamsActions.UNSET_RACER_TEAM:
             return {
                 ...state,
                 racerTeam: null,
+                racerTeamError: '',
+            }
+        case RacerTeamsActions.ADD_RACER_TEAM:
+            return {
+                ...state,
+                racerTeams: [...state.racerTeams, action.payload],
+                racerTeamLoading: false,
+                racerTeamError: '',
+            };
+        case RacerTeamsActions.UPDATE_RACER_TEAM:
+            const racerTeamsWithoutUpdatedTeam = state.racerTeams
+                .filter(racerTeam => racerTeam.id !== action.payload.id);
+
+            const updatedRacerTeam = new RacerTeam(
+                action.payload.id,
+                action.payload.name,
+                action.payload.yearOfFoundation,
+                action.payload.wonWorldCupsNumber,
+                !!action.payload.haveAlreadyPayed
+            );
+
+            return {
+                ...state,
+                racerTeams: [...racerTeamsWithoutUpdatedTeam, updatedRacerTeam],
+                racerTeamLoading: false,
+                racerTeamError: '',
+            };
+        case RacerTeamsActions.FAIL_RACER_TEAM:
+            return {
+                ...state,
+                racerTeamError: action.payload,
+                racerTeamLoading: false,
             }
         case RacerTeamsActions.START_DELETE_RACER_TEAM:
             return {

@@ -52,9 +52,18 @@ export class RacerTeamNewEditComponent implements OnInit {
                 wonWorldCups: this.racerTeamForm.value.cups,
                 haveAlreadyPayed: this.racerTeamForm.value.payed,
             };
+
             this.store.dispatch(new RacerTeamsActions.StartAddRacerTeam(newRacerTeamFormData));
         } else {
-            console.log('TODO edit part');
+            const updateRacerTeamFormData = {
+                id: this.racerTeam.id,
+                name: this.racerTeamForm.value.name,
+                yearOfFoundation: this.racerTeamForm.value.year,
+                wonWorldCups: this.racerTeamForm.value.cups,
+                haveAlreadyPayed: this.racerTeamForm.value.payed,
+            };
+
+            this.store.dispatch(new RacerTeamsActions.StartUpdateRacerTeam(updateRacerTeamFormData));
         }
     }
 

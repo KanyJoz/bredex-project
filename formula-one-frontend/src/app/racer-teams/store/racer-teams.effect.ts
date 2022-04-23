@@ -85,6 +85,36 @@ export class RacerTeamsEffects {
             { dispatch: false },
     )
 
+    startUpdateRacerTeam = createEffect(() => {
+        return this.actions.pipe(
+            ofType(RacerTeamsActions.START_UPDATE_RACER_TEAM),
+            switchMap((startUpdateData: RacerTeamsActions.StartUpdateRacerTeam) => {
+                return this.http.put<RacerTeam>(
+                        environment.apiURL + 'racer_teams/' + startUpdateData.payload.id,
+                        startUpdateData.payload
+                    ).pipe(
+                    map(updatedRacerTeam => {
+                        return new RacerTeamsActions.UpdateRacerTeam(updatedRacerTeam);
+                    }),
+                    catchError(errorsResponse => {
+                        return of(new RacerTeamsActions.FailRacerTeam('Could not update the current racer team!'));
+                    })
+                );
+            })
+        );
+    });
+
+    successUpdateRacerTeam = createEffect(
+        () =>
+            this.actions.pipe(
+                ofType(RacerTeamsActions.UPDATE_RACER_TEAM),
+                tap(() => {
+                    this.router.navigate(['/racer-teams']);
+                }),
+            ),
+            { dispatch: false },
+    )
+
     constructor(
         private actions: Actions,
         private http: HttpClient,

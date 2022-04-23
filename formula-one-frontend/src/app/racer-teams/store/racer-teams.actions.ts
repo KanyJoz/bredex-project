@@ -5,11 +5,13 @@ import { RacerTeam } from './../racer-team.model';
 export const FETCH_RACER_TEAMS = '[Racer Teams] Fetch Racer Teams';
 export const SET_RACER_TEAMS = '[Racer Teams] Set Racer Teams';
 export const FAIL_RACER_TEAMS = '[Racer Teams] Fail Racer Teams';
-export const START_ADD_RACER_TEAM = '[Racer Teams] Start Add Racer Team';
-export const ADD_RACER_TEAM = '[Racer Teams] Add Racer Team';
 export const GET_RACER_TEAM = '[Racer Teams] Get Racer Team';
 export const SET_RACER_TEAM = '[Racer Teams] Set Racer Team';
 export const UNSET_RACER_TEAM = '[Racer Teams] Unset Racer Team';
+export const START_ADD_RACER_TEAM = '[Racer Teams] Start Add Racer Team';
+export const ADD_RACER_TEAM = '[Racer Teams] Add Racer Team';
+export const START_UPDATE_RACER_TEAM = '[Racer Teams] Start Update Racer Team';
+export const UPDATE_RACER_TEAM = '[Racer Teams] Update Racer Team';
 export const FAIL_RACER_TEAM = '[Racer Teams] Fail Racer Team';
 export const START_DELETE_RACER_TEAM = '[Racer Teams] Start Delete Racer Team';
 export const DELETE_RACER_TEAM = '[Racer Teams] Delete Racer Team';
@@ -30,6 +32,22 @@ export class FailRacerTeams implements Action {
     constructor(public payload: string){}
 }
 
+export class GetRacerTeam implements Action {
+    readonly type = GET_RACER_TEAM;
+
+    constructor(public payload: number) {}
+}
+
+export class SetRacerTeam implements Action {
+    readonly type = SET_RACER_TEAM;
+
+    constructor(public payload: RacerTeam) {}
+}
+
+export class UnSetRacerTeam implements Action {
+    readonly type = UNSET_RACER_TEAM;
+}
+
 export class StartAddRacerTeam implements Action {
     readonly type = START_ADD_RACER_TEAM;
 
@@ -47,20 +65,22 @@ export class AddRacerTeam implements Action {
     constructor(public payload: RacerTeam) {}
 }
 
-export class GetRacerTeam implements Action {
-    readonly type = GET_RACER_TEAM;
+export class StartUpdateRacerTeam implements Action {
+    readonly type = START_UPDATE_RACER_TEAM;
 
-    constructor(public payload: number) {}
+    constructor(public payload: {
+        id: number,
+        name: string,
+        yearOfFoundation: number,
+        wonWorldCups: number,
+        haveAlreadyPayed: boolean,
+    }) {}
 }
 
-export class SetRacerTeam implements Action {
-    readonly type = SET_RACER_TEAM;
+export class UpdateRacerTeam implements Action {
+    readonly type = UPDATE_RACER_TEAM;
 
     constructor(public payload: RacerTeam) {}
-}
-
-export class UnSetRacerTeam implements Action {
-    readonly type = UNSET_RACER_TEAM;
 }
 
 export class FailRacerTeam implements Action {
@@ -83,13 +103,15 @@ export class DeleteRacerTeam implements Action {
 
 export type RacerTeamsActions =
     | FetchRacerTeams
-    | StartAddRacerTeam
-    | AddRacerTeam
     | SetRacerTeams
     | FailRacerTeams
-    | DeleteRacerTeam
-    | StartDeleteRacerTeams
-    | FailRacerTeam
     | GetRacerTeam
     | SetRacerTeam
-    | UnSetRacerTeam;
+    | UnSetRacerTeam
+    | StartAddRacerTeam
+    | AddRacerTeam
+    | StartUpdateRacerTeam
+    | UpdateRacerTeam
+    | FailRacerTeam
+    | StartDeleteRacerTeams
+    | DeleteRacerTeam;
