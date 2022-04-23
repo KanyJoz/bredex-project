@@ -30,6 +30,8 @@ export class RacerTeamsListComponent implements OnInit {
     }
 
     onDelete(racerTeamID: number) {
-        this.store.dispatch(new RacerTeamsActions.StartDeleteRacerTeams(racerTeamID));
+        if (confirm("Are you sure to delete this racer team?")) {
+            this.store.dispatch(new RacerTeamsActions.StartDeleteRacerTeams(racerTeamID));
+        }
     }
 }
