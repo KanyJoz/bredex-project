@@ -4,9 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\RacerTeamStoreRequest;
 use App\Http\Requests\RacerTeamUpdateRequest;
-use App\Http\Resources\RacerTeamResource;
 use App\Models\RacerTeam;
-use Illuminate\Http\Request;
+use App\Http\Resources\RacerTeamResource;
 
 class RacerTeamController extends Controller
 {

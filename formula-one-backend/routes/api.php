@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\RacerTeamController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RacerTeamController;
+use App\Http\Controllers\UserAuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,9 +15,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['name' => 'all'], function() {
+    Route::group(['name' => 'public'], function() {
+        Route::post('/register', [UserAuthController::class, 'register']);
+        Route::post('/login', [UserAuthController::class, 'login']);
+    });
+    Route::group(['name' => 'private', 'middleware' => ['auth:api']], function() {
+        Route::apiResource('racer_teams', RacerTeamController::class)
+            ->only(['index', 'show', 'store', 'update', 'destroy']);
+    });
 });
-
-Route::apiResource('racer_teams', RacerTeamController::class)
-    ->only(['index', 'show', 'store', 'update', 'destroy']);
