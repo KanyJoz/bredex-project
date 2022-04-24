@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './shared/shared.module';
 import { PartialsModule } from './partials/partials.module';
+import { AuthModule } from './auth/auth.module';
 import { CoreModule } from './core.module';
 import { RacerTeamsModule } from './racer-teams/racer-teams.module';
 
@@ -27,6 +28,7 @@ import { RacerTeamsEffects } from './racer-teams/store/racer-teams.effect';
     StoreModule.forRoot(fromApp.appReducer),
     EffectsModule.forRoot([RacerTeamsEffects]),
     PartialsModule,
+    AuthModule,
     RacerTeamsModule,
   ],
   providers: [],
