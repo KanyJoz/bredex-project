@@ -1,5 +1,7 @@
-import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { AppState } from 'src/app/store/app.reducer';
+import { Store } from '@ngrx/store';
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Injectable, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { switchMap, map, catchError, of, tap } from "rxjs";
@@ -10,6 +12,23 @@ import { RacerTeam } from './../racer-team.model';
 
 @Injectable()
 export class RacerTeamsEffects {
+    token: string = '';
+
+    constructor(
+        private actions: Actions,
+        private http: HttpClient,
+        private router: Router,
+        private store: Store<AppState>
+    ) {
+        this.store.select('auth').pipe(
+            map(authSlice => {
+                return authSlice.user ? authSlice.user.token : '';
+            })
+        ).subscribe((token: string) => {
+            this.token = token;
+        })
+    }
+
     fetchRacerTeams = createEffect(() => {
         return this.actions.pipe(
             ofType(RacerTeamsActions.FETCH_RACER_TEAMS),
@@ -30,7 +49,14 @@ export class RacerTeamsEffects {
         return this.actions.pipe(
             ofType(RacerTeamsActions.START_DELETE_RACER_TEAM),
             switchMap((startActionData: RacerTeamsActions.StartDeleteRacerTeams) => {
-                return this.http.delete<RacerTeam>(environment.apiURL + 'racer_teams/' + startActionData.payload).pipe(
+                const headers = new HttpHeaders({
+                    Authorization: `Bearer ${this.token}`,
+                });
+
+                return this.http.delete<RacerTeam>(
+                        environment.apiURL + 'racer_teams/' + startActionData.payload,
+                        { headers: headers}
+                    ).pipe(
                     map(racerTeam => {
                         return new RacerTeamsActions.DeleteRacerTeam(racerTeam.id);
                     }),
@@ -46,7 +72,15 @@ export class RacerTeamsEffects {
         return this.actions.pipe(
             ofType(RacerTeamsActions.START_ADD_RACER_TEAM),
             switchMap((startAddData: RacerTeamsActions.StartAddRacerTeam) => {
-                return this.http.post<RacerTeam>(environment.apiURL + 'racer_teams', startAddData.payload).pipe(
+                const headers = new HttpHeaders({
+                    Authorization: `Bearer ${this.token}`,
+                });
+
+                return this.http.post<RacerTeam>(
+                    environment.apiURL + 'racer_teams',
+                    startAddData.payload,
+                    { headers: headers }
+                ).pipe(
                     map(newRacerTeam => {
                         return new RacerTeamsActions.AddRacerTeam(newRacerTeam);
                     }),
@@ -89,9 +123,14 @@ export class RacerTeamsEffects {
         return this.actions.pipe(
             ofType(RacerTeamsActions.START_UPDATE_RACER_TEAM),
             switchMap((startUpdateData: RacerTeamsActions.StartUpdateRacerTeam) => {
+                const headers = new HttpHeaders({
+                    Authorization: `Bearer ${this.token}`,
+                });
+
                 return this.http.put<RacerTeam>(
                         environment.apiURL + 'racer_teams/' + startUpdateData.payload.id,
-                        startUpdateData.payload
+                        startUpdateData.payload,
+                        { headers: headers }
                     ).pipe(
                     map(updatedRacerTeam => {
                         return new RacerTeamsActions.UpdateRacerTeam(updatedRacerTeam);
@@ -114,10 +153,4 @@ export class RacerTeamsEffects {
             ),
             { dispatch: false },
     )
-
-    constructor(
-        private actions: Actions,
-        private http: HttpClient,
-        private router: Router
-    ) {}
 }
