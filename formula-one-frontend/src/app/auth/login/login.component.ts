@@ -1,5 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { AppState } from 'src/app/store/app.reducer';
+import { Store } from '@ngrx/store';
+
+import * as AuthActions from '../store/auth.actions';
 
 @Component({
   selector: 'app-login',
@@ -11,14 +15,18 @@ export class LoginComponent implements OnInit {
     userLoading: boolean = false;
     userError: string = '';
 
-    constructor() { }
+    constructor(private store: Store<AppState>) { }
 
     ngOnInit(): void {
+        this.store.select('auth')
+        .subscribe(authSlice => {
+            this.userLoading = authSlice.userLoading;
+            this.userError = authSlice.userError;
+        });
     }
 
     onSubmit(): void {
-        console.log(this.loginForm.value);
-        this.loginForm.reset();
+        this.store.dispatch(new AuthActions.LoginUser(this.loginForm.value));
     }
 
 }

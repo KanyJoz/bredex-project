@@ -1,5 +1,9 @@
+import { AppState } from 'src/app/store/app.reducer';
+import { Store } from '@ngrx/store';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+
+import * as AuthActions from '../store/auth.actions';
 
 @Component({
   selector: 'app-register',
@@ -11,14 +15,18 @@ export class RegisterComponent implements OnInit {
     userLoading: boolean = false;
     userError: string = '';
 
-    constructor() { }
+    constructor(private store: Store<AppState>) { }
 
     ngOnInit(): void {
+        this.store.select('auth')
+        .subscribe(authSlice => {
+            this.userLoading = authSlice.userLoading;
+            this.userError = authSlice.userError;
+        });
     }
 
     onSubmit(): void {
-        console.log(this.registerForm.value);
-        this.registerForm.reset();
+        this.store.dispatch(new AuthActions.RegisterUser(this.registerForm.value));
     }
 
 }

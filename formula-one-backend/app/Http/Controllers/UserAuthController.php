@@ -23,7 +23,11 @@ class UserAuthController extends Controller
 
         $token = $user->createToken('API Token')->accessToken;
 
-        return response([ 'user' => $user, 'token' => $token]);
+        return response([
+            'name' => $user->name,
+            'email' => $user->email,
+            'token' => $token,
+        ]);
     }
 
     public function login(UserAuthLoginRequest $request)
@@ -41,7 +45,11 @@ class UserAuthController extends Controller
 
         $token = auth()->user()->createToken('API Token')->accessToken;
 
-        return response(['user' => auth()->user(), 'token' => $token]);
+        return response([
+            'name' => auth()->user()->name,
+            'email' => auth()->user()->email,
+            'token' => $token,
+        ]);
 
     }
 }
