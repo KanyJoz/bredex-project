@@ -9,6 +9,11 @@ use App\Http\Resources\RacerTeamResource;
 
 class RacerTeamController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api', ['except' => ['index', 'show']]);
+    }
+
     public function index()
     {
         $allRacerTeams = RacerTeam::all();

@@ -5,13 +5,15 @@
         </div>
         <div class="collapser navbar-collapse">
             <ul class="nav navbar-nav">
-                <li
-                    *ngFor="let headerLink of headerLinks"
-                    routerLinkActive="active"
-                    [routerLinkActiveOptions]="{exact: true}"
-                >
-                    <a [routerLink]="headerLink.navigationArray">{{ headerLink.text }}</a>
-                </li>
+                <ng-container *ngFor="let headerLink of headerLinks">
+                    <li
+                        *ngIf="!headerLink.needsAuth || (headerLink.needsAuth && user)"
+                        routerLinkActive="active"
+                        [routerLinkActiveOptions]="{exact: true}"
+                    >
+                        <a [routerLink]="headerLink.navigationArray">{{ headerLink.text }}</a>
+                    </li>
+                </ng-container>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown" appDropdown>
@@ -23,7 +25,9 @@
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Logout</a></li>
+                        <li *ngIf="!user"><a [routerLink]="['/auth', 'register']">Register</a></li>
+                        <li *ngIf="!user"><a [routerLink]="['/auth', 'login']">Login</a></li>
+                        <li *ngIf="user"><a (click)="onLogout">Logout</a></li>
                     </ul>
                 </li>
             </ul>

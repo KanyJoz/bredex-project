@@ -20,7 +20,7 @@ Route::group(['name' => 'all'], function() {
         Route::post('/register', [UserAuthController::class, 'register']);
         Route::post('/login', [UserAuthController::class, 'login']);
     });
-    Route::group(['name' => 'private', 'middleware' => ['auth:api']], function() {
+    Route::group(['name' => 'private'], function() {
         Route::apiResource('racer_teams', RacerTeamController::class)
             ->only(['index', 'show', 'store', 'update', 'destroy']);
     });
