@@ -14,6 +14,7 @@ import { RacerTeamsModule } from './racer-teams/racer-teams.module';
 import { AppComponent } from './app.component';
 import * as fromApp from './store/app.reducer';
 import { RacerTeamsEffects } from './racer-teams/store/racer-teams.effect';
+import { AuthEffects } from './auth/store/auth.effects';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,7 @@ import { RacerTeamsEffects } from './racer-teams/store/racer-teams.effect';
     SharedModule,
     CoreModule,
     StoreModule.forRoot(fromApp.appReducer),
-    EffectsModule.forRoot([RacerTeamsEffects]),
+    EffectsModule.forRoot([RacerTeamsEffects, AuthEffects]),
     PartialsModule,
     AuthModule,
     RacerTeamsModule,
