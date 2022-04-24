@@ -1,1 +1,101 @@
-<p>register works!</p>
+<div class="container">
+    <div *ngIf="!userError.length && !userLoading">
+        <div class="row">
+            <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+                <form (ngSubmit)="onSubmit()" #f="ngForm">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input
+                            type="text"
+                            id="name"
+                            class="form-control"
+                            ngModel
+                            name="name"
+                            required
+                            #name="ngModel"
+                        >
+                        <span
+                            class="help-block"
+                            *ngIf="!name.valid && name.touched"
+                        >
+                            Please enter a name
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input
+                            type="email"
+                            id="email"
+                            class="form-control"
+                            ngModel
+                            name="email"
+                            required
+                            email
+                            #email="ngModel"
+                        >
+                        <span
+                            class="help-block"
+                            *ngIf="!email.valid && email.touched"
+                        >
+                            Please enter a valid email
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input
+                            type="password"
+                            id="password"
+                            class="form-control"
+                            ngModel
+                            name="password"
+                            required
+                            minlength="8"
+                            #password="ngModel"
+                        >
+                        <span
+                            class="help-block"
+                            *ngIf="!password.valid && password.touched"
+                        >
+                            Please enter a password (min 8 characters)
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <label for="password_confirmation">Password Confirmation</label>
+                        <input
+                            type="password"
+                            id="password_confirmation"
+                            class="form-control"
+                            ngModel
+                            name="password_confirmation"
+                            required
+                            minlength="8"
+                            #password_confirmation="ngModel"
+                        >
+                        <span
+                            class="help-block"
+                            *ngIf="!password_confirmation.valid && password_confirmation.touched"
+                        >
+                            Please enter your password again
+                        </span>
+                    </div>
+                    <button
+                        class="btn btn-primary"
+                        type="submit"
+                        [disabled]="!f.valid"
+                    >
+                        Register
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div
+        *ngIf="userError.length && !userLoading"
+        class="alert alert-danger"
+        role="alert"
+    >
+        <strong>{{ userError }}</strong>
+    </div>
+
+    <div class="lds-dual-ring" *ngIf="userLoading"></div>
+</div>

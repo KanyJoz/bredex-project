@@ -1,0 +1,46 @@
+$error-color: rgb(182, 30, 30);
+$spinner-color: #DDD;
+
+.help-block {
+    color: $error-color;
+}
+
+input.ng-invalid.ng-touched {
+    border-color: $error-color ;
+
+    &:focus {
+        box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%), 0 0 8px $error-color
+    }
+}
+
+.lds-dual-ring {
+    display: inline-block;
+    width: 250px;
+    height: 250px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    &:after {
+        content: " ";
+        display: block;
+        width: 200px;
+        height: 200px;
+        margin: 8px;
+        border-radius: 50%;
+        border: 6px solid $spinner-color;
+        border-color: $spinner-color transparent $spinner-color transparent;
+        animation: lds-dual-ring 1.2s linear infinite;
+    }
+}
+
+@keyframes lds-dual-ring {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
