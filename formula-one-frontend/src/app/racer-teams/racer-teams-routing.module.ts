@@ -1,3 +1,4 @@
+import { AuthGuard } from './../auth/auth-guard.service';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -12,8 +13,8 @@ const racerTeamsRoutes: Routes = [
         component: RacerTeamsComponent,
         children: [
             { path: '', component: RacerTeamsListComponent},
-            { path: 'new', component: RacerTeamNewEditComponent },
-            { path: ':id/edit', component: RacerTeamNewEditComponent }
+            { path: 'new', component: RacerTeamNewEditComponent, canActivate: [AuthGuard] },
+            { path: ':id/edit', component: RacerTeamNewEditComponent, canActivate: [AuthGuard] }
         ]
     }
 ];
