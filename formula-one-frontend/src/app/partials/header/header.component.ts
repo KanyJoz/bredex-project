@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { HeaderLink } from './header-link.model';
 import { User } from './../../auth/user.model';
 import { AppState } from 'src/app/store/app.reducer';
+import * as AuthActions from '../../auth/store/auth.actions';
 
 @Component({
   selector: 'app-header',
@@ -34,6 +35,6 @@ export class HeaderComponent implements OnInit {
     }
 
     onLogout(): void {
-        console.log("Logout");
+        this.store.dispatch(new AuthActions.LogoutUser());
     }
 }

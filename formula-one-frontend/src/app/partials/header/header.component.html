@@ -27,7 +27,11 @@
                     <ul class="dropdown-menu">
                         <li *ngIf="!user"><a [routerLink]="['/auth', 'register']">Register</a></li>
                         <li *ngIf="!user"><a [routerLink]="['/auth', 'login']">Login</a></li>
-                        <li *ngIf="user"><a (click)="onLogout">Logout</a></li>
+                        <li
+                            id="logout"
+                            *ngIf="user"
+                            (click)="onLogout()"
+                        ><a>Logout</a></li>
                     </ul>
                 </li>
             </ul>

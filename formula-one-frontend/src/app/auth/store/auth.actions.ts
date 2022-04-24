@@ -6,6 +6,7 @@ export const REGISTER_USER = '[Auth] Register User';
 export const LOGIN_USER = '[Auth] Login User';
 export const SET_USER = '[Auth] Set User';
 export const FAIL_USER = '[Auth] Fail User';
+export const LOGOUT_USER = '[Auth] Logout User';
 
 export class RegisterUser implements Action {
     readonly type = REGISTER_USER;
@@ -39,9 +40,14 @@ export class FailUser implements Action {
     constructor(public payload: string) {}
 }
 
+export class LogoutUser implements Action {
+    readonly type = LOGOUT_USER;
+}
+
 
 export type AuthActions =
     | RegisterUser
     | LoginUser
     | SetUser
-    | FailUser;
+    | FailUser
+    | LogoutUser;

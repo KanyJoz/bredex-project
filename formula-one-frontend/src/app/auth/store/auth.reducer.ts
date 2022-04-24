@@ -44,6 +44,11 @@ export function racerTeamsReducer(
                 userLoading: false,
                 userError: action.payload
             };
+        case AuthActions.LOGOUT_USER:
+            return {
+                ...state,
+                user: null,
+            };
         default:
             return state;
     }
